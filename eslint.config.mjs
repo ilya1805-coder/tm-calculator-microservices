@@ -4,7 +4,7 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import { dirname, resolve } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -26,7 +26,7 @@ export default tseslint.config(
       globals: { ...globals.node, ...globals.jest },
       sourceType: 'module',
       parserOptions: {
-        project: join(__dirname, 'tsconfig.json'),
+        project: resolve(process.cwd(), 'tsconfig.json'),
         tsconfigRootDir: __dirname,
       },
     },
