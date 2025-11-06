@@ -1,6 +1,7 @@
 import TrademarkCalculator from '@/components/TrademarkCalculator';
 
 export default async function Page() {
+  console.log(`${process.env.BACKEND_URL}/classes`);
   async function getTrademarkClasses() {
     //TODO move to config
     const res = await fetch(`${process.env.BACKEND_URL}/classes`);
