@@ -4,11 +4,6 @@
 **/node_modules/
 /apps/frontend/.pnp
 /apps/frontend/.pnp.*
-/apps/frontend/.yarn/*
-!/apps/frontend/.yarn/patches
-!/apps/frontend/.yarn/plugins
-!/apps/frontend/.yarn/releases
-!/apps/frontend/.yarn/versions
 
 # testing
 /apps/frontend/coverage
@@ -20,24 +15,6 @@
 # production
 /apps/frontend/build
 
-# misc
-/apps/frontend/.DS_Store
-/apps/frontend/*.pem
-
-# debug
-/apps/frontend/npm-debug.log*
-/apps/frontend/yarn-debug.log*
-/apps/frontend/yarn-error.log*
-/apps/frontend/.pnpm-debug.log*
-
 # env files (can opt-in for committing if needed)
-.env
-/apps/backend/.env
-/apps/frontend/.env
-
-# vercel
-/apps/frontend/.vercel
-
-# typescript
-/apps/frontend/*.tsbuildinfo
-/apps/frontend/next-env.d.ts
+*.env
+**/*.env
