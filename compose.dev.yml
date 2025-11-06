@@ -13,6 +13,19 @@ services:
     volumes:
       - ./apps/frontend:/usr/src/app
     command: sh -c "npm install && npm run dev"
+    depends_on:
+      - gateway-app
+  gateway-app:
+    container_name: gateway
+    build:
+      context: ./apps/backend/gateway
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+    environment:
+      PORT: ${BACKEND_PORT}
+    volumes:
+      - ./apps/backend/gateway:/usr/src/app
+    command: sh -c "npm install && npm run start:dev"
 
 volumes:
   mongo_data: {}
