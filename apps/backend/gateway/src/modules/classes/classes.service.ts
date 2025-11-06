@@ -1,19 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Class } from './models/class.model';
+import { ClientProxy } from '@nestjs/microservices';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ClassesService {
-  findAll(): Class[] {
-    //TODO replace with real data
-    return [
-      {
-        classId: 1,
-        description: 'dsad',
-      },
-      {
-        classId: 2,
-        description: 'dadsad',
-      },
-    ];
+  constructor(@Inject('CLASSES_SERVICE') private client: ClientProxy) {}
+
+  findAll(): Observable<Class[]> {
+    const pattern = { cmd: 'getAll' };
+    return this.client.send(pattern, []);
   }
 }

@@ -1,4 +1,29 @@
 services:
+  classes-service:
+    container_name: classes-service
+    build:
+      context: ./apps/backend/classes-service
+    environment:
+      PORT: ${CLASSES_SERVICE_PORT}
+      HOST: ${CLASSES_SERVICE_HOST}
+    volumes:
+      - ./apps/backend/classes-service:/usr/src/app
+    command: sh -c "npm install && npm run start:dev"
+  gateway-app:
+    container_name: gateway
+    build:
+      context: ./apps/backend/gateway
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+    environment:
+      PORT: ${BACKEND_PORT}
+      CLASSES_SERVICE_NAME: ${CLASSES_SERVICE_NAME}
+      CLASSES_SERVICE_PORT: ${CLASSES_SERVICE_PORT}
+    volumes:
+      - ./apps/backend/gateway:/usr/src/app
+    command: sh -c "npm install && npm run start:dev"
+    depends_on:
+      - classes-service
   frontend-app:
     container_name: frontend
     build:
@@ -15,17 +40,6 @@ services:
     command: sh -c "npm install && npm run dev"
     depends_on:
       - gateway-app
-  gateway-app:
-    container_name: gateway
-    build:
-      context: ./apps/backend/gateway
-    ports:
-      - ${BACKEND_PORT}:${BACKEND_PORT}
-    environment:
-      PORT: ${BACKEND_PORT}
-    volumes:
-      - ./apps/backend/gateway:/usr/src/app
-    command: sh -c "npm install && npm run start:dev"
 
 volumes:
   mongo_data: {}
