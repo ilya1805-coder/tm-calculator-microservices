@@ -7,7 +7,7 @@
     "lint:frontend": "cd apps/frontend && eslint .",
     "lint:frontend:fix": "cd apps/frontend && eslint . --fix",
     "lint:backend": "cd apps/frontend && eslint .",
-    "lint:backend:fix": "eslint ./apps/backend --fix",
+    "lint:backend:fix": "cd apps/frontend && eslint . --fix",
     "format": "prettier --write .",
     "check-format": "prettier --check ."
   },
