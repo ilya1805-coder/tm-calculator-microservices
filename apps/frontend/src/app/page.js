@@ -1,11 +1,27 @@
 import TrademarkCalculator from '@/components/TrademarkCalculator';
 
 export default async function Page() {
-  console.log(`${process.env.BACKEND_URL}/classes`);
   async function getTrademarkClasses() {
-    //TODO move to config
-    const res = await fetch(`${process.env.BACKEND_URL}/classes`);
-    return res.json();
+    //TODO: in real project must be moved to separate methods
+    const res = await fetch(`${process.env.BACKEND_URL}/graphql`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        query: `
+        {
+          classes {
+            classId
+            description
+          }
+        }
+      `,
+      }),
+
+      next: { revalidate: 60 }, // revalidate every 60s if using ISR
+    });
+
+    const { data } = await res.json();
+    return data.classes;
   }
   const trademarkClasses = await getTrademarkClasses();
 
