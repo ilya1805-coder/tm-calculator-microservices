@@ -1,12 +1,8 @@
-// eslint.config.mjs
 import eslint from '@eslint/js';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-import { fileURLToPath } from 'url';
-import { resolve } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
+import { join } from 'path';
 
 export default tseslint.config(
   {
@@ -25,7 +21,7 @@ export default tseslint.config(
       globals: { ...globals.node, ...globals.jest },
       sourceType: 'module',
       parserOptions: {
-        project: resolve(process.cwd(), 'tsconfig.json'),
+        project: join(process.cwd(), 'tsconfig.json'),
         tsconfigRootDir: process.cwd(),
       },
     },
