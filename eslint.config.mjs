@@ -11,7 +11,12 @@ const __dirname = dirname(__filename);
 
 export default tseslint.config(
   {
-    ignores: ['**/dist/**', '**/node_modules/**', 'eslint.config.mjs', 'apps/frontend/**'],
+    ignores: [
+      '**/dist/**',
+      '**/node_modules/**',
+      'eslint.config.mjs',
+      'apps/frontend/**',
+    ],
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
